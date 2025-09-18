@@ -17,6 +17,7 @@ app.use(
   })
 );
 
+// connect to database
 connectDB();
 
 app.use(express.json());
