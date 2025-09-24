@@ -19,7 +19,7 @@ const ResumeSchema = new mongoose.Schema(
       theme: String,
       colorPlatte: [String],
     },
-    porfileInfo: {
+    profileInfo: {
       ProfilePreviewerUrl: String,
       fullName: String,
       description: String,
