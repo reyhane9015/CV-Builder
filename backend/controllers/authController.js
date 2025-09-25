@@ -6,16 +6,13 @@ const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-// @desc Register a new user
-// @route POST /api/auth/register
-// @access Public
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, profileImageUrl } = req.body;
 
     const userExsits = await User.findOne({ email });
     if (userExsits) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: "کاربر قبلا ثبت نام کرده است" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -40,17 +37,22 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc Login user
-// @route POST /api/auth/login
-// @access Public
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-
     if (!user) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res
+        .status(401)
+        .json({ message: "نام کاربری یا کلمه عبور نامعتبر است" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res
+        .status(401)
+        .json({ message: "نام کاربری یا کلمه عبور نامعتبر است" });
     }
 
     res.json({
@@ -60,11 +62,6 @@ const loginUser = async (req, res) => {
       profileImageUrl: user.profileImageUrl,
       token: generateToken(user._id),
     });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(500).json({ message: "Invalid email or password" });
-    }
   } catch (error) {
     res.status(500).json({ message: "SERVER error", error: error.message });
   }
@@ -77,7 +74,7 @@ const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "کاربر یافت نشد" });
     }
 
     res.json(user);

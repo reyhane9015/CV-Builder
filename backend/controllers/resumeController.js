@@ -97,6 +97,8 @@ const getResumeById = async (req, res) => {
     if (!resume) {
       return res.status(404).json({ message: "Resume not found" });
     }
+
+    res.status(200).json(resume);
   } catch (error) {
     res
       .status(500)

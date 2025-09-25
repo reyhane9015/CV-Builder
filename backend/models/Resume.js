@@ -69,6 +69,12 @@ const ResumeSchema = new mongoose.Schema(
         progress: Number,
       },
     ],
+    certifications: [
+      {
+        title: String,
+        issuer: String,
+      },
+    ],
     interests: [String],
   },
   { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
