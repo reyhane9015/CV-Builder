@@ -58,9 +58,13 @@ const ResumeSchema = new mongoose.Schema(
     ],
     projects: [
       {
+        // title: String,
+        // issuer: String,
+        // year: String,
         title: String,
-        issuer: String,
-        year: String,
+        description: String,
+        github: String,
+        liveDemo: String,
       },
     ],
     languages: [
@@ -73,6 +77,7 @@ const ResumeSchema = new mongoose.Schema(
       {
         title: String,
         issuer: String,
+        year: String,
       },
     ],
     interests: [String],
