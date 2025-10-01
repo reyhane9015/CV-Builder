@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Farsi";
+  }
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: bold;
+    src: url("/fonts/iranyekanwebboldfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 100;
+    src: url("/fonts/iranyekanwebthinfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 300;
+    src: url("/fonts/iranyekanweblightfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: normal;
+    src: url("/fonts/iranyekanwebregularfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 500;
+    src: url("/fonts/iranyekanwebmediumfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 800;
+    src: url("/fonts/iranyekanwebextraboldfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 850;
+    src: url("/fonts/iranyekanwebblackfanum.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: Farsi;
+    font-style: normal;
+    font-weight: 900;
+    src: url("/fonts/iranyekanwebextrablackfanum.woff") format("woff");
+  }
+}
+
+@theme {
+  --break-point-3xl: 1920;
+  --color-primary: #9328e7;
+}
+
+body {
+  direction: rtl;
+  background-color: #f6f8fc;
+  overflow-x: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer utilities {
+  @keyframes text-shine {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  .animate-text-shine {
+    animation: text-shine 3s ease-in-out infinite alternate;
+  }
+}
+
+@layer components {
+  .input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-black bg-gray-50/50 rounded px-4 py-3 mb-4 mt-3 border-2 border-gray-100 outline-none focus-within:border-purple-300;
+  }
+
+  .btn-primary {
+    @apply w-full text-sm font-medium text-white bg-black shadow-lg shadow-purple-600/5 p-[10px] rounded-md my-1 hover:bg-purple-600/15 hover:text-black cursor-pointer;
+  }
+
+  .btn-small {
+    @apply flex items-center gap-2 text-[13px] font-semibold text-white bg-gradient-to-r from-purple-500/85 to-purple-700 px-5 py-1.5 rounded-lg cursor-pointer;
+  }
+
+  .btn-small-light {
+    @apply flex items-center gap-2 text-[12px] font-semibold text-purple-800 bg-purple-600/15 border-2 border-purple-100 hover:border-purple-400 px-3 py-1.5 rounded-lg cursor-pointer;
+  }
+
+  .form-input {
+    @apply w-full text-sm text-black outline-none bg-white border-2 border-slate-100 px-2.5 py-3 rounded-md mt-2 placeholder:text-gray-500 focus-within:border-purple-300;
+  }
+}
