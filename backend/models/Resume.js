@@ -17,10 +17,10 @@ const ResumeSchema = new mongoose.Schema(
     },
     template: {
       theme: String,
-      colorPlatte: [String],
+      colorPalette: [String],
     },
     profileInfo: {
-      ProfilePreviewerUrl: String,
+      ProfilePreviewUrl: String,
       fullName: String,
       description: String,
       summary: String,

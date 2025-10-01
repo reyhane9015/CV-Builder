@@ -11,7 +11,7 @@ function SkillsInfoForm({
 }) {
   return (
     <div className="px-5 pt-5">
-      <h2 className="text-lg font-semibold text-gray-900">تحصیلات</h2>
+      <h2 className="text-lg font-semibold text-gray-900">مهارتها</h2>
       <div className="mt-4 flex flex-col gap-4 mb-3">
         {skillsInfo.map((skill, index) => (
           <div

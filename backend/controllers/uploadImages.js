@@ -44,16 +44,14 @@ const uploadResumeImages = async (req, res) => {
         }
 
         if (newProfileImage) {
-          if (resume.profileInfo?.ProfilePreviewerUrl) {
+          if (resume.profileInfo?.ProfilePreviewUrl) {
             const oldProfile = path.join(
-              uploadesFolder.path.basename(
-                resume.profileInfo.ProfilePreviewerUrl
-              )
+              uploadesFolder.path.basename(resume.profileInfo.ProfilePreviewUrl)
             );
             if (fs.existsSync(oldProfile)) fs.unlinkSync(oldProfile);
           }
 
-          resume.profileInfo.ProfilePreviewerUrl = `${baseUrl}/uploads/${newProfileImage.filename}`;
+          resume.profileInfo.ProfilePreviewUrl = `${baseUrl}/uploads/${newProfileImage.filename}`;
         }
 
         await resume.save();
@@ -61,7 +59,7 @@ const uploadResumeImages = async (req, res) => {
         res.status(200).json({
           message: "Images uploaded successfully",
           thumbnailLink: resume.thumbnailLink,
-          ProfilePreviewerUrl: resume.profileInfo.ProfilePreviewerUrl,
+          ProfilePreviewUrl: resume.profileInfo.ProfilePreviewUrl,
         });
       }
     );

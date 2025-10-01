@@ -22,6 +22,7 @@ import SkillsInfoForm from "./Forms/SkillsInfoForm";
 import ProjectsDetailsForm from "./Forms/ProjectsDetailsForm";
 import CertificationsInfoForm from "./Forms/CertificationInfoForm";
 import AdditionalInfoForm from "./Forms/AdditionalInfoForm";
+import RenderResume from "../../components/ResumeTemplates/RenderResume";
 // import toast from "react-hot-toast";
 
 function EditResume() {
@@ -44,7 +45,7 @@ function EditResume() {
     thumbnailLink: "",
     profileInfo: {
       profileImg: null,
-      ProfilePreviewerUrl: "",
+      ProfilePreviewUrl: "",
       previewUrl: "",
       fullName: "",
       description: "",
@@ -52,7 +53,7 @@ function EditResume() {
     },
     template: {
       theme: "",
-      colorPlatte: "",
+      colorPalette: "",
     },
     contactInfo: {
       email: "",
@@ -552,7 +553,7 @@ function EditResume() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
+          {/* <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
             <StepProgress progress={progress} />
 
             {renderForm()}
@@ -599,10 +600,15 @@ function EditResume() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div ref={resumeRef} className="">
-            111
+            <RenderResume
+              resumeData={resumeData}
+              templateId={resumeData?.template?.theme || ""}
+              colorPalette={resumeData?.template?.colorPalette || []}
+              containerWidth={baseWidth}
+            />
           </div>
         </div>
       </div>

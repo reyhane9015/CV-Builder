@@ -8,7 +8,7 @@ const createResume = async (req, res) => {
 
     const defaultResumeData = {
       profileInfo: {
-        ProfilePreviewerUrl: null,
+        ProfilePreviewUrl: null,
         // previewUrl: "",
         fullName: "",
         description: "",
@@ -154,10 +154,10 @@ const deleteResume = async (req, res) => {
       if (fs.existsSync(oldThumbnail)) fs.unlinkSync(oldThumbnail);
     }
 
-    if (resume.profileInfo?.ProfilePreviewerUrl) {
+    if (resume.profileInfo?.ProfilePreviewUrl) {
       const oldProfile = path.join(
         uploadesFolder,
-        path.basename(resume.profileInfo.profilePreviewerUrl)
+        path.basename(resume.profileInfo.profilePreviewUrl)
       );
       if (fs.existsSync(oldProfile)) fs.unlinkSync(oldProfile);
     }
