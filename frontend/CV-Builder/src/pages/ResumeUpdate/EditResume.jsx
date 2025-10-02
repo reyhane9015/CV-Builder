@@ -487,7 +487,15 @@ function EditResume() {
     }
   };
 
-  const uploadResumeImages = async () => {};
+  const uploadResumeImages = async () => {
+    try {
+      setIsLoading(true);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // const updateResumeDetails = async (thumbnailLink, profilePreviewUrl) => {};
 
@@ -553,7 +561,7 @@ function EditResume() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          {/* <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
+          <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
             <StepProgress progress={progress} />
 
             {renderForm()}
@@ -600,7 +608,7 @@ function EditResume() {
                 </button>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div ref={resumeRef} className="">
             <RenderResume
