@@ -10,10 +10,10 @@ function ProfileInfoForm({ profileData, updateSection }) {
 
       <div className="mt-4">
         <ProfilePhotoSelector
-          image={profileData?.profileImg || profileData?.profilePreviewUrl}
+          image={profileData?.profileImg || profileData?.ProfilePreviewUrl}
           setImage={(value) => updateSection("profileImg", value)}
-          preview={profileData?.profilePreviewUrl}
-          setPreview={(value) => updateSection("profilePreviewUrl", value)}
+          preview={profileData?.ProfilePreviewUrl}
+          setPreview={(value) => updateSection("ProfilePreviewUrl", value)}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

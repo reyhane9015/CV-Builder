@@ -20,7 +20,7 @@ function Dashboard() {
       const response = await axiosInstance.get(API_PATHS.RESUME.GET_ALL);
       setAllResumes(response.data);
 
-      console.log("data is", response.data);
+      console.log("data in dashboard is", response.data);
     } catch (error) {
       console.log("Error on fetching resumes:", error);
     }

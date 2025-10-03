@@ -68,9 +68,9 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
               className="w-[100px] h-[100px] max-w-[110px] max-h-[110px] rounded-full flex items-center justify-center"
               style={{ backgroundColor: themeColors[1] }}
             >
-              {resumeData.profileInfo.profilePreviewUrl ? (
+              {resumeData.profileInfo.ProfilePreviewUrl ? (
                 <img
-                  src={resumeData.profileInfo.profilePreviewUrl}
+                  src={resumeData.profileInfo.ProfilePreviewUrl}
                   className="w-[90px] h-[90px] rounded-full"
                 />
               ) : (

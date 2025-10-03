@@ -23,7 +23,12 @@ import ProjectsDetailsForm from "./Forms/ProjectsDetailsForm";
 import CertificationsInfoForm from "./Forms/CertificationInfoForm";
 import AdditionalInfoForm from "./Forms/AdditionalInfoForm";
 import RenderResume from "../../components/ResumeTemplates/RenderResume";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import {
+  captureElementAsImage,
+  dataURLtoFile,
+  fixTailwindColors,
+} from "../../utils/helper";
 
 function EditResume() {
   const { resumeId } = useParams();
@@ -487,17 +492,120 @@ function EditResume() {
     }
   };
 
+  const uploadResumeThumbnail = async (resumeId, elementRef) => {
+    const imageDataUrl = await captureElementAsImage(elementRef.current);
+    const thumbnailFile = dataURLtoFile(imageDataUrl, `resume-${resumeId}.png`);
+
+    const formData = new FormData();
+    formData.append("thumbnail", thumbnailFile);
+
+    return axiosInstance.post(
+      API_PATHS.RESUME.UPLOAD_THUMBNAIL(resumeId),
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+  };
+
   const uploadResumeImages = async () => {
     try {
       setIsLoading(true);
+
+      if (!resumeRef.current) {
+        throw new Error("Resume element not found");
+      }
+
+      fixTailwindColors(resumeRef.current);
+
+      const imageDataUrl = await captureElementAsImage(resumeRef.current);
+
+      const thumbnailFile = dataURLtoFile(
+        imageDataUrl,
+        `resume-${resumeId}.png`
+      );
+      const profileImageFile =
+        resumeData?.profileInfo?.profileImg instanceof File
+          ? resumeData.profileInfo.profileImg
+          : null;
+
+      // console.log(
+      //   "profileImageFileeeeeeee:",
+      //   resumeData?.profileInfo?.profileImg
+      // );
+
+      const formData = new FormData();
+      if (profileImageFile instanceof File) {
+        formData.append("profileImage", profileImageFile);
+      }
+      if (thumbnailFile instanceof File) {
+        formData.append("thumbnail", thumbnailFile);
+      }
+
+      // console.log("FormData contents:", [...formData.entries()]);
+
+      const uploadResponse = await axiosInstance.put(
+        API_PATHS.RESUME.UPLOAD_IMAGES(resumeId),
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      console.log("thumb issss", uploadResponse.data.thumbnailLink);
+      const { thumbnailLink, ProfilePreviewUrl } = uploadResponse.data;
+
+      if (thumbnailLink || ProfilePreviewUrl) {
+        await updateResumeDetails(
+          thumbnailLink,
+          ProfilePreviewUrl || resumeData.profileInfo.ProfilePreviewUrl
+        );
+
+        await uploadResumeThumbnail(resumeId, resumeRef);
+
+        navigate("/dashboard");
+        toast.success("رزمه با موفقیت اپلود شد.");
+      } else {
+        setErrorMsg("No image links returned from the server.");
+      }
     } catch (error) {
       console.error("Error uploading images:", error);
+      setErrorMsg(
+        error.response?.data?.message || "خطایی در آپلود تصاویر رخ داد."
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
-  // const updateResumeDetails = async (thumbnailLink, profilePreviewUrl) => {};
+  const updateResumeDetails = async (thumbnailLink, ProfilePreviewUrl) => {
+    try {
+      setIsLoading(true);
+
+      const updatedResumeData = {
+        ...resumeData,
+        thumbnailLink: thumbnailLink || resumeData.thumbnailLink,
+        profileInfo: {
+          ...resumeData.profileInfo,
+          profileImg: undefined,
+          ProfilePreviewUrl:
+            ProfilePreviewUrl || resumeData.profileInfo.ProfilePreviewUrl,
+        },
+      };
+
+      const response = await axiosInstance.put(
+        API_PATHS.RESUME.UPDATE(resumeId),
+        updatedResumeData
+      );
+
+      console.log("Resume updated with imageeeeeeeeee:", response.data);
+    } catch (error) {
+      console.error("Error capturing image:", error);
+      setErrorMsg(
+        error.response?.data?.message || "خطایی در بروزرسانی رزومه رخ داد."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleDeleteResume = async () => {};
 
@@ -595,7 +703,7 @@ function EditResume() {
                   disabled={isLoading}
                 >
                   <LuSave className="text-[16px]" />
-                  {isLoading ? "درحال بروزرسانی" : "ذخیره و خروج"}
+                  {isLoading ? "درحال بروزرسانی..." : "ذخیره و خروج"}
                 </button>
 
                 <button

@@ -1,4 +1,5 @@
 import moment from "moment";
+import html2canvas from "html2canvas";
 
 export const validateEmail = (email) => {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -136,3 +137,80 @@ export const getLightColorFormImage = (imageUrl) => {
 export function formatYearMonth(yearMonth) {
   return yearMonth ? moment(yearMonth, "YYYY-MM").format("YYYY-MM") : "";
 }
+
+// ------------ Conver resume to image ---------------
+
+const convertOklch = (value) => {
+  if (!value || typeof value !== "string") return value;
+  if (value.includes("oklch")) {
+    return "#000";
+  }
+  return value;
+};
+
+export const fixTailwindColors = (element) => {
+  if (!element) return;
+  const elements = element.querySelectorAll("*");
+
+  elements.forEach((el) => {
+    const style = window.getComputedStyle(el);
+
+    ["color", "backgroundColor", "borderColor"].forEach((prop) => {
+      let value = style.getPropertyValue(prop);
+      if (value && value.includes("oklch")) {
+        el.style.setProperty(prop, convertOklch(value), "important");
+      }
+    });
+  });
+};
+
+export async function captureElementAsImage(element) {
+  if (!element) throw new Error("No Element provided");
+
+  // const canvas = await html2canvas(element);
+
+  await Promise.all(
+    Array.from(element.querySelectorAll("img")).map(
+      (img) =>
+        new Promise((resolve) => {
+          if (img.complete) return resolve();
+          img.onload = resolve;
+          img.onerror = () => {
+            console.error("Image load error:", img.src);
+            resolve(); // Continue even on error
+          };
+        })
+    )
+  );
+  fixTailwindColors(element);
+
+  const canvas = await html2canvas(element, {
+    useCORS: true,
+    allowTaint: true,
+    scale: 2,
+    logging: false,
+  });
+
+  return canvas.toDataURL("image/png");
+}
+
+export const dataURLtoFile = (dataUrl, fileName) => {
+  if (!dataUrl) {
+    throw new Error("Invalid dataUrl");
+  }
+  const arr = dataUrl.split(",");
+  // const mime = arr[0].match(/:(.*?);/)[1];
+  const mimeMatch = arr[0].match(/:(.*?);/);
+  if (!mimeMatch) throw new Error("Invalid MIME type in dataUrl");
+  const mime = mimeMatch[1];
+
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], fileName, { type: mime });
+};
