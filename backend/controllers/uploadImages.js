@@ -46,7 +46,8 @@ const uploadResumeImages = async (req, res) => {
         if (newProfileImage) {
           if (resume.profileInfo?.ProfilePreviewUrl) {
             const oldProfile = path.join(
-              uploadesFolder.path.basename(resume.profileInfo.ProfilePreviewUrl)
+              uploadesFolder,
+              path.basename(resume.profileInfo.ProfilePreviewUrl)
             );
             if (fs.existsSync(oldProfile)) fs.unlinkSync(oldProfile);
           }

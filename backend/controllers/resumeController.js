@@ -9,7 +9,7 @@ const createResume = async (req, res) => {
     const defaultResumeData = {
       profileInfo: {
         ProfilePreviewUrl: null,
-        // previewUrl: "",
+        previewUrl: "",
         fullName: "",
         description: "",
         summary: "",
@@ -119,7 +119,9 @@ const updateResume = async (req, res) => {
         .json({ message: "Resume not found or unauthorized" });
     }
 
-    Object.assign(resume, req.body);
+    console.log("Incoming update body:", req.body);
+    // Object.assign(resume, req.body);
+    resume.set(req.body);
 
     const savedResume = await resume.save();
     res.json(savedResume);
@@ -157,7 +159,7 @@ const deleteResume = async (req, res) => {
     if (resume.profileInfo?.ProfilePreviewUrl) {
       const oldProfile = path.join(
         uploadesFolder,
-        path.basename(resume.profileInfo.profilePreviewUrl)
+        path.basename(resume.profileInfo.ProfilePreviewUrl)
       );
       if (fs.existsSync(oldProfile)) fs.unlinkSync(oldProfile);
     }
@@ -181,10 +183,47 @@ const deleteResume = async (req, res) => {
   }
 };
 
+const uploadResumeThumbnail = async (req, res) => {
+  try {
+    const resumeId = req.params.id;
+
+    const resume = await Resume.findOne({
+      _id: resumeId,
+      userId: req.user._id,
+    });
+
+    if (!resume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    // Build public file URL
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
+
+    // Update resume with thumbnailLink
+    resume.thumbnailLink = fileUrl;
+    await resume.save();
+
+    res.json({
+      message: "Thumbnail uploaded successfully",
+      thumbnailLink: fileUrl,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to upload thumbnail", error: error.message });
+  }
+};
+
 module.exports = {
   createResume,
   getUserResumes,
   getResumeById,
   updateResume,
   deleteResume,
+  uploadResumeThumbnail,
 };

@@ -20,7 +20,9 @@ const ResumeSchema = new mongoose.Schema(
       colorPalette: [String],
     },
     profileInfo: {
+      profileImg: String,
       ProfilePreviewUrl: String,
+      previewUrl: String,
       fullName: String,
       description: String,
       summary: String,
