@@ -1,4 +1,4 @@
-Resume Builder Website
+************ Resume Builder Website ************
 
 A modern, interactive resume builder built with React.js, MongoDB, and TailwindCSS. This project allows users to easily create, customize, and download their resumes. With a user-friendly interface, it supports multiple templates, color palettes, and authentication for saving your progress.
 
