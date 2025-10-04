@@ -613,7 +613,12 @@ function EditResume() {
 
   const reactToPrintFn = useReactToPrint({ contentRef: resumeDownloadRef });
 
-  const updateBaseWidth = () => {};
+  const updateBaseWidth = () => {
+    if (resumeRef.current) {
+      const parentWidth = resumeRef.current.offsetWidth;
+      setBaseWidth(parentWidth);
+    }
+  };
 
   useEffect(() => {
     updateBaseWidth();
@@ -621,14 +626,12 @@ function EditResume() {
 
     if (resumeId) {
       fetchResumeDetailsById();
-
-      console.log("resumeData is", resumeData);
     }
 
     return () => {
       window.removeEventListener("resize", updateBaseWidth);
     };
-  }, []);
+  }, [resumeId]);
 
   return (
     <DashboardLayout>
@@ -720,7 +723,7 @@ function EditResume() {
             </div>
           </div>
 
-          <div ref={resumeRef} className="">
+          <div ref={resumeRef} className="w-full overflow-hidden h-fit">
             <RenderResume
               resumeData={resumeData}
               templateId={resumeData?.template?.theme || ""}

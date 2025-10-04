@@ -13,7 +13,7 @@ function RenderResume({
   console.log("resumeData in renderResume is", resumeData);
 
   switch (templateId) {
-    case "01":
+    case "Template One":
       return (
         <TemplateOne
           resumeData={resumeData}
@@ -21,7 +21,7 @@ function RenderResume({
           containerWidth={containerWidth}
         />
       );
-    case "02":
+    case "Template Two":
       return (
         <TemplateTwo
           resumeData={resumeData}
@@ -29,7 +29,7 @@ function RenderResume({
           containerWidth={containerWidth}
         />
       );
-    case "03":
+    case "Template Three":
       return (
         <TemplateThree
           resumeData={resumeData}
@@ -37,7 +37,7 @@ function RenderResume({
           containerWidth={containerWidth}
         />
       );
-    case "04":
+    case "Template Four":
       return (
         <TemplateFour
           resumeData={resumeData}

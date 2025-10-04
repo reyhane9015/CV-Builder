@@ -25,7 +25,7 @@ function Modal({
       className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black/50"
     >
       <div
-        className={`relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden`}
+        className={`relative flex flex-col bg-gray-100 shadow-lg rounded-lg overflow-hidden`}
       >
         {/* modal header */}
         {!hideHeader && (

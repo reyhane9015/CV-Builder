@@ -34,13 +34,14 @@ const Title = ({ text, color }) => {
 function TemplateOne({ resumeData, colorPalette, containerWidth }) {
   const themeColors = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
 
-  const resumeRef = useRef(null);
+  const templateRef = useRef(null);
   const [baseWidth, setBaseWidth] = useState(800);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const actualBaseWidth = resumeRef.current.offsetWidth;
-    setBaseWidth(actualBaseWidth);
+    // const actualBaseWidth = templateRef.current.offsetWidth;
+    // setBaseWidth(actualBaseWidth);
+    setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -48,12 +49,12 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
 
   return (
     <div
-      ref={resumeRef}
+      ref={templateRef}
       className="p-3 bg-white w-full"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
         transformOrigin: "top right",
-        // width: containerWidth > 0 ? `${baseWidth}px` : "auto",
+        width: containerWidth > 0 ? `${baseWidth}px` : "auto",
         height: "auto",
       }}
     >
@@ -128,11 +129,13 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
                 />
               )}
 
-              <ContactInfo
-                icon={<LuRss />}
-                iconBG={themeColors[2]}
-                value={resumeData.contactInfo.website}
-              />
+              {resumeData.contactInfo.website && (
+                <ContactInfo
+                  icon={<LuRss />}
+                  iconBG={themeColors[2]}
+                  value={resumeData.contactInfo.website}
+                />
+              )}
             </div>
             <div className="mt-5">
               <Title text="تحصیلات" color={themeColors[2]} />
@@ -162,14 +165,20 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
         </div>
         {/* left section */}
         <div className="col-span-8 pt-10 ml-4 pb-5">
-          <div>
+          <div
+            className="pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="معرفی خود" color={themeColors[2]} />
             <p className="text-sm font-medium">
               {resumeData.profileInfo.summary}
             </p>
           </div>
 
-          <div className="mt-4">
+          <div
+            className="mt-4 pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="سوابق کاری" color={themeColors[2]} />
 
             {resumeData.workExperience.map((data, index) => (
@@ -186,7 +195,10 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
             ))}
           </div>
 
-          <div className="mt-4">
+          <div
+            className="mt-4 pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="پروژه ها" color={themeColors[2]} />
 
             {resumeData.projects.map((project, index) => (
@@ -202,7 +214,10 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
             ))}
           </div>
 
-          <div className="mt-4">
+          <div
+            className="mt-4 pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="مهارتها" color={themeColors[2]} />
             <SkillsSection
               skills={resumeData.skills}
@@ -211,7 +226,10 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
             />
           </div>
 
-          <div className="mt-4">
+          <div
+            className="mt-4 pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="مدارک" color={themeColors[2]} />
 
             <div className="grid grid-cols-2 gap-2">

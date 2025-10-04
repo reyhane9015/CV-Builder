@@ -34,13 +34,14 @@ const Title = ({ text, color }) => {
 function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
   const themeColors = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
 
-  const resumeRef = useRef(null);
+  const templateRef = useRef(null);
   const [baseWidth, setBaseWidth] = useState(800);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const actualBaseWidth = resumeRef.current.offsetWidth;
-    setBaseWidth(actualBaseWidth);
+    // const actualBaseWidth = templateRef.current.offsetWidth;
+    // setBaseWidth(actualBaseWidth);
+    setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -48,7 +49,7 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
 
   return (
     <div
-      ref={resumeRef}
+      ref={templateRef}
       className="p-3 bg-white"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
@@ -81,8 +82,8 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
         </div>
 
         <div>
-          <div className="grid grid-cols-12 items-center">
-            <div className="col-span-8">
+          <div className="grid grid-cols-12 gap-6 md:gap-8 items-center">
+            <div className="col-span-6 flex flex-col gap-2">
               <h2 className="text-2xl font-bold">
                 {resumeData.profileInfo.fullName}
               </h2>
@@ -96,7 +97,7 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
               />
             </div>
 
-            <div className="col-span-4 flex flex-col gap-5 mt-2">
+            <div className="col-span-6 flex flex-col gap-5 mt-2">
               <ContactInfo
                 icon={<LuMail />}
                 iconBG={themeColors[2]}
@@ -111,8 +112,6 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
           </div>
         </div>
       </div>
-
-      {/* ---------------------------------------------- */}
 
       <div className="grid grid-cols-12 gap-8">
         {/* Right section */}
@@ -140,11 +139,13 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
                 />
               )}
 
-              <ContactInfo
-                icon={<LuRss />}
-                iconBG={themeColors[2]}
-                value={resumeData.contactInfo.website}
-              />
+              {resumeData.contactInfo.website && (
+                <ContactInfo
+                  icon={<LuRss />}
+                  iconBG={themeColors[2]}
+                  value={resumeData.contactInfo.website}
+                />
+              )}
             </div>
             <div className="mt-5">
               <Title text="تحصیلات" color={themeColors[2]} />
@@ -173,7 +174,7 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
           </div>
         </div>
         {/* left section */}
-        <div className="col-span-8 pt-10 ml-4 pb-5">
+        <div className="col-span-8 pt-2 ml-4 pb-5">
           <div>
             <Title text="معرفی خود" color={themeColors[2]} />
             <p className="text-sm font-medium">

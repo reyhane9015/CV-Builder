@@ -21,12 +21,13 @@ const DEFAULT_THEME = ["#EBFDFF", "#3A1F4FD", "#CEFAFE", "#00B8DB", "#4A5565"];
 
 const Title = ({ text, color }) => {
   return (
-    <div className="relative w-fit mb-2.5">
-      <span
-        className="absolute bottom-0 left-0 w-full h-2"
+    <div className="w-full mb-2.5 flex justify-center">
+      <h2
+        className={`w-full text-sm font-bold text-center`}
         style={{ backgroundColor: color }}
-      ></span>
-      <h2 className={`relative text-sm font-bold`}>{text}</h2>
+      >
+        {text}
+      </h2>
     </div>
   );
 };
@@ -34,13 +35,14 @@ const Title = ({ text, color }) => {
 function TemplateThree({ resumeData, colorPalette, containerWidth }) {
   const themeColors = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
 
-  const resumeRef = useRef(null);
+  const templateRef = useRef(null);
   const [baseWidth, setBaseWidth] = useState(800);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const actualBaseWidth = resumeRef.current.offsetWidth;
-    setBaseWidth(actualBaseWidth);
+    // const actualBaseWidth = templateRef.current.offsetWidth;
+    // setBaseWidth(actualBaseWidth);
+    setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -48,7 +50,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
 
   return (
     <div
-      ref={resumeRef}
+      ref={templateRef}
       className="p-3 bg-white"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
@@ -57,21 +59,21 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
         height: "auto",
       }}
     >
-      <div className="px-10 pt-10 pb-5">
+      <div className="px-10 pt-10 pb-2">
         <div className="flex items-start gap-5 mb-5">
           <div
-            className="w-[140px] h-[140px] max-w-[140px] max-h-[140px] rounded-2xl flex items-center justify-center"
+            className="w-[150px] h-[180px] max-w-[150px] max-h-[180px] rounded-2xl flex items-center justify-center"
             style={{ backgroundColor: themeColors[2] }}
           >
             {" "}
             {resumeData.profileInfo.ProfilePreviewUrl ? (
               <img
                 src={resumeData.profileInfo.ProfilePreviewUrl}
-                className="w-[140px] h-[140px] rounded-2xl"
+                className="w-[150px] h-[180px] rounded-2xl align-center"
               />
             ) : (
               <div
-                className="w-[140px] h-[140px] rounded-full text-5xl flex items-center justify-center"
+                className="w-[150px] h-[140px] rounded-full text-5xl flex items-center justify-center"
                 style={{
                   backgroundColor: themeColors[2],
                   color: themeColors[4],
@@ -83,8 +85,8 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           </div>
 
           <div className="">
-            <div className="grid grid-cols-12 gap-2 items-center">
-              <div className="col-span-6">
+            <div className="grid grid-cols-12 gap-6 md:gap-8 items-center">
+              <div className="col-span-6 flex flex-col gap-2">
                 <h2 className="text-2xl font-bold">
                   {resumeData.profileInfo.fullName}
                 </h2>
@@ -97,15 +99,6 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
                   iconBG={themeColors[2]}
                   value={resumeData.contactInfo.location}
                 />
-              </div>
-
-              <div className="col-span-6 flex flex-col gap-5 mt-2">
-                {" "}
-                <ContactInfo
-                  icon={<LuMail />}
-                  iconBG={themeColors[2]}
-                  value={resumeData.contactInfo.email}
-                />
                 <ContactInfo
                   icon={<LuPhone />}
                   iconBG={themeColors[2]}
@@ -113,8 +106,13 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
                 />
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 flex flex-col gap-3 mt-5">
                 {" "}
+                <ContactInfo
+                  icon={<LuMail />}
+                  iconBG={themeColors[2]}
+                  value={resumeData.contactInfo.email}
+                />
                 {resumeData.contactInfo.linkedin && (
                   <ContactInfo
                     icon={<RiLinkedinLine />}
@@ -122,14 +120,18 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
                     value={resumeData.contactInfo.linkedin}
                   />
                 )}
-              </div>
-              <div className="col-span-6">
-                {" "}
                 {resumeData.contactInfo.github && (
+                  <ContactInfo
+                    icon={<LuGithub />}
+                    iconBG={themeColors[2]}
+                    value={resumeData.contactInfo.github}
+                  />
+                )}
+                {resumeData.contactInfo.website && (
                   <ContactInfo
                     icon={<LuRss />}
                     iconBG={themeColors[2]}
-                    value={resumeData.contactInfo.github}
+                    value={resumeData.contactInfo.website}
                   />
                 )}
               </div>
@@ -139,7 +141,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
       </div>
 
       {/* bottom section */}
-      <div className="mx-10 pb-5">
+      <div className="mx-10 py-5">
         <div>
           <Title text="معرفی خود" color={themeColors[2]} />
           <p className="text-sm font-medium">
@@ -147,7 +149,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           </p>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-6">
           <Title text="سوابق کاری" color={themeColors[2]} />
 
           {resumeData.workExperience.map((data, index) => (
@@ -164,7 +166,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           ))}
         </div>
 
-        <div className="mt-4">
+        <div className="mt-6">
           <Title text="پروژه ها" color={themeColors[2]} />
 
           {resumeData.projects.map((project, index) => (
@@ -180,7 +182,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           ))}
         </div>
 
-        <div className="mt-5">
+        <div className="mt-6">
           <Title text="تحصیلات" color={themeColors[2]} />
 
           {resumeData.education.map((data, index) => (
@@ -195,7 +197,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           ))}
         </div>
 
-        <div className="mt-4">
+        <div className="mt-6">
           <Title text="مهارتها" color={themeColors[2]} />
           <SkillsSection
             skills={resumeData.skills}
@@ -204,7 +206,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           />
         </div>
 
-        <div className="mt-4">
+        <div className="mt-6">
           <Title text="مدارک" color={themeColors[2]} />
 
           <div className="grid grid-cols-2 gap-4">
@@ -221,7 +223,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
         </div>
 
         <div>
-          <div className="grid grid-cols-2 gap-10 mt-4">
+          <div className="mt-6">
             <Title text="زبانها" color={themeColors[2]} />
 
             <LanguageSection
@@ -233,7 +235,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
 
           {resumeData.interests.length > 0 &&
             resumeData.interests[0] !== "" && (
-              <div className="">
+              <div className="mt-6">
                 <Title text="علایق" color={themeColors[2]} />
 
                 <div className="flex items-center flex-wrap gap-3 mt-4">

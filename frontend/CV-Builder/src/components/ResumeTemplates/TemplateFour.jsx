@@ -34,13 +34,14 @@ const Title = ({ text, color }) => {
 function TemplateThree({ resumeData, colorPalette, containerWidth }) {
   const themeColors = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
 
-  const resumeRef = useRef(null);
+  const templateRef = useRef(null);
   const [baseWidth, setBaseWidth] = useState(800);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const actualBaseWidth = resumeRef.current.offsetWidth;
-    setBaseWidth(actualBaseWidth);
+    // const actualBaseWidth = templateRef.current.offsetWidth;
+    // setBaseWidth(actualBaseWidth);
+    setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -48,7 +49,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
 
   return (
     <div
-      ref={resumeRef}
+      ref={templateRef}
       className="p-3 bg-white"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
@@ -105,7 +106,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
               <div className="col-span-6 flex flex-col gap-5 mt-2">
                 {resumeData.contactInfo.github && (
                   <ContactInfo
-                    icon={<LuRss />}
+                    icon={<LuGithub />}
                     iconBG={themeColors[2]}
                     value={resumeData.contactInfo.github}
                   />
@@ -119,11 +120,11 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
                   />
                 )}
 
-                {resumeData.contactInfo.github && (
+                {resumeData.contactInfo.website && (
                   <ContactInfo
-                    icon={<LuGithub />}
+                    icon={<LuRss />}
                     iconBG={themeColors[2]}
-                    value={resumeData.contactInfo.github}
+                    value={resumeData.contactInfo.website}
                   />
                 )}
               </div>

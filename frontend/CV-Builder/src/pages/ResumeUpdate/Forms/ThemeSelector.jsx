@@ -65,15 +65,15 @@ function ThemeSelector({
           className="btn-small-light"
           onClick={() => handeThemeSelection()}
         >
-          <LuCircleCheckBig className="text-[16px]" />
+          <LuCircleCheckBig className="text-[17px] font-semibold" />
           اعمال کن
         </button>
       </div>
 
-      <div className="grid grid-cols-12 gap-2 md:gap-5">
-        <div className="col-span-12 md:col-span-6 bg-white border border-gray-400">
+      <div className="grid grid-cols-12 gap-5">
+        <div className="col-span-12 md:col-span-6 bg-white max-h-[68vh]">
           {tabValue === "قالبها" && (
-            <div className="p-2 grid grid-cols-1 lg:grid-cols-3 gap-5 max-h-[80vh] overflow-y-scroll custom-scollbar md:pl-4">
+            <div className="p-2 grid grid-cols-1 lg:grid-cols-3 gap-8 max-h-[68vh] overflow-y-scroll custom-scollbar md:pl-4">
               {resumeTemplates.map((template, index) => {
                 return (
                   <TemplateCard
@@ -83,6 +83,7 @@ function ThemeSelector({
                     onSelect={() =>
                       setSelectedTemplate({ theme: template.id, index })
                     }
+                    theme={template.id}
                   />
                 );
               })}
@@ -90,7 +91,7 @@ function ThemeSelector({
           )}
 
           {tabValue === "پالت رنگها" && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-h-[80vh] overflow-y-scroll custom-scollbar md:pl-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  overflow-y-scroll custom-scollbar md:pl-4">
               {themeColorPalette.themeOne.map((colors, index) => (
                 <ColorPalette
                   key={`palette_${index}`}
@@ -104,7 +105,7 @@ function ThemeSelector({
         </div>
 
         <div
-          className="col-span-12 md:col-span-6 bg-white  border border-gray-400 overflow-hidden"
+          className="col-span-12 md:col-span-6 bg-white border-4 border-dashed border-gray-200 overflow-hidden"
           ref={resumeRef}
         >
           <RenderResume

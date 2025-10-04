@@ -5,22 +5,22 @@ import TEMPLATE_FOUR_IMG from "../assets/template-four.jpg";
 
 export const resumeTemplates = [
   {
-    id: "01",
+    id: "Template One",
     thumbnailImg: TEMPLATE_ONE_IMG,
     colorPaletteCode: "themeOne",
   },
   {
-    id: "02",
+    id: "Template Two",
     thumbnailImg: TEMPLATE_TWO_IMG,
     colorPaletteCode: "themeTwo",
   },
   {
-    id: "03",
+    id: "Template Three",
     thumbnailImg: TEMPLATE_THREE_IMG,
     colorPaletteCode: "themeThree",
   },
   {
-    id: "04",
+    id: "Template Four",
     thumbnailImg: TEMPLATE_FOUR_IMG,
     colorPaletteCode: "themeFour",
   },

@@ -15,7 +15,7 @@ function Tabs({ tabs, activeTab, setActiveTab }) {
             onClick={() => setActiveTab(tab.label)}
           >
             <div className="flex items-center">
-              <span className="text-[14px] font-semibold text-purple-700">
+              <span className="text-[17px] font-semibold text-purple-700">
                 {tab.label}
               </span>
             </div>
