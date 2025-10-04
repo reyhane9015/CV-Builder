@@ -29,6 +29,8 @@ import {
   dataURLtoFile,
   fixTailwindColors,
 } from "../../utils/helper";
+import Modal from "./../../components/Modal";
+import ThemeSelector from "./Forms/ThemeSelector";
 
 function EditResume() {
   const { resumeId } = useParams();
@@ -669,7 +671,7 @@ function EditResume() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
+          <div className="bg-white rounded-lg border border-purple-100 overflow-hidden h-fit">
             <StepProgress progress={progress} />
 
             {renderForm()}
@@ -728,6 +730,26 @@ function EditResume() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={openThemeSelector}
+        onClose={() => setOpenThemeSelector(resumeData?.template)}
+        title="تمامی قالبها"
+      >
+        <div className="w-[90vw] h-[80vh]">
+          <ThemeSelector
+            selectedTheme={resumeData?.template}
+            setSelectedTheme={(value) => {
+              setResumeData((prevState) => ({
+                ...prevState,
+                template: value || prevState.template,
+              }));
+            }}
+            resumeData={null}
+            onClose={() => setOpenThemeSelector(false)}
+          />
+        </div>
+      </Modal>
     </DashboardLayout>
   );
 }

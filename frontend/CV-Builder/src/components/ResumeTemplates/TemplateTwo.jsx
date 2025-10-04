@@ -31,7 +31,7 @@ const Title = ({ text, color }) => {
   );
 };
 
-function TemplateOne({ resumeData, colorPalette, containerWidth }) {
+function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
   const themeColors = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
 
   const resumeRef = useRef(null);
@@ -49,59 +49,55 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
   return (
     <div
       ref={resumeRef}
-      className="p-3 bg-white w-full"
+      className="p-3 bg-white"
       style={{
         transform: containerWidth > 0 ? `scale(${scale})` : "none",
         transformOrigin: "top right",
-        // width: containerWidth > 0 ? `${baseWidth}px` : "auto",
+        width: containerWidth > 0 ? `${baseWidth}px` : "auto",
         height: "auto",
       }}
     >
-      <div className="grid grid-cols-12 gap-4 md:gap-8">
-        {/* Right section */}
+      {/* ---------------------------------------------- */}
+      <div className="flex items-start gap-5 p-4 mb-5 ">
         <div
-          className="col-span-4 py-10"
-          style={{ backgroundColor: themeColors[0] }}
+          className="w=-100px] h-[100px] max-w-[105px] max-h-[105px] rounded-2xl flex items-center justify-center"
+          style={{ backgroundColor: themeColors[1] }}
         >
-          <div className="flex flex-col items-center px-2">
+          {resumeData.profileInfo.ProfilePreviewUrl ? (
+            <img
+              src={resumeData.profileInfo.ProfilePreviewUrl}
+              className="w-[90px] h-[90px] rounded-lg"
+            />
+          ) : (
             <div
-              className="w-[100px] h-[100px] max-w-[110px] max-h-[110px] rounded-full flex items-center justify-center"
-              style={{ backgroundColor: themeColors[1] }}
+              className="w-[90px] h-[90px] rounded-full text-5xl flex items-center justify-center"
+              style={{
+                backgroundColor: themeColors[2],
+                color: themeColors[4],
+              }}
             >
-              {resumeData.profileInfo.ProfilePreviewUrl ? (
-                <img
-                  src={resumeData.profileInfo.ProfilePreviewUrl}
-                  className="w-[90px] h-[90px] rounded-full"
-                />
-              ) : (
-                <div
-                  className="w-[90px] h-[90px] rounded-full text-5xl flex items-center justify-center"
-                  style={{
-                    backgroundColor: themeColors[2],
-                    color: themeColors[4],
-                  }}
-                >
-                  <LuUser />
-                </div>
-              )}
+              <LuUser />
             </div>
+          )}
+        </div>
 
-            <h2 className="text-xl font-bold mt-3">
-              {resumeData.profileInfo.fullName}
-            </h2>
-            <p className="text-[16px] text-center">
-              {resumeData.profileInfo.description}
-            </p>
-          </div>
-
-          <div className="my-6 mx-6">
-            <div className="flex flex-col gap-4">
+        <div>
+          <div className="grid grid-cols-12 items-center">
+            <div className="col-span-8">
+              <h2 className="text-2xl font-bold">
+                {resumeData.profileInfo.fullName}
+              </h2>
+              <p className="text-[16px] font-bold mb-2">
+                {resumeData.profileInfo.description}
+              </p>
               <ContactInfo
                 icon={<LuMapPinHouse />}
                 iconBG={themeColors[2]}
                 value={resumeData.contactInfo.location}
               />
+            </div>
 
+            <div className="col-span-4 flex flex-col gap-5 mt-2">
               <ContactInfo
                 icon={<LuMail />}
                 iconBG={themeColors[2]}
@@ -112,7 +108,23 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
                 iconBG={themeColors[2]}
                 value={resumeData.contactInfo.phone}
               />
+            </div>
+          </div>
+        </div>
+      </div>
 
+      {/* ---------------------------------------------- */}
+
+      <div className="grid grid-cols-12 gap-8">
+        {/* Right section */}
+        <div
+          className="col-span-4 py-10"
+          style={{ backgroundColor: themeColors[0] }}
+        >
+          <div className="flex flex-col items-center px-2"></div>
+
+          <div className="my-6 mx-6">
+            <div className="flex flex-col gap-4">
               {resumeData.contactInfo.linkedin && (
                 <ContactInfo
                   icon={<RiLinkedinLine />}
@@ -120,6 +132,7 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
                   value={resumeData.contactInfo.linkedin}
                 />
               )}
+
               {resumeData.contactInfo.github && (
                 <ContactInfo
                   icon={<LuGithub />}
@@ -254,4 +267,4 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
   );
 }
 
-export default TemplateOne;
+export default TemplateTwo;
