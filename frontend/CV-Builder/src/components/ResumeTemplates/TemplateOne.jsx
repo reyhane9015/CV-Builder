@@ -199,6 +199,18 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
             className="mt-4 pb-2 border-b-2"
             style={{ borderBottomColor: themeColors[2] }}
           >
+            <Title text="مهارتها" color={themeColors[2]} />
+            <SkillsSection
+              skills={resumeData.skills}
+              accentColor={themeColors[3]}
+              bgColor={themeColors[2]}
+            />
+          </div>
+
+          <div
+            className="mt-4 pb-2 border-b-2"
+            style={{ borderBottomColor: themeColors[2] }}
+          >
             <Title text="پروژه ها" color={themeColors[2]} />
 
             {resumeData.projects.map((project, index) => (
@@ -212,18 +224,6 @@ function TemplateOne({ resumeData, colorPalette, containerWidth }) {
                 isPreview={false}
               />
             ))}
-          </div>
-
-          <div
-            className="mt-4 pb-2 border-b-2"
-            style={{ borderBottomColor: themeColors[2] }}
-          >
-            <Title text="مهارتها" color={themeColors[2]} />
-            <SkillsSection
-              skills={resumeData.skills}
-              accentColor={themeColors[3]}
-              bgColor={themeColors[2]}
-            />
           </div>
 
           <div

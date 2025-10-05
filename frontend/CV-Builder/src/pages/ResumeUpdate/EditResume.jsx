@@ -343,7 +343,6 @@ function EditResume() {
             }
           />
         );
-
       case "education-info":
         return (
           <EducationDetailsForm
@@ -366,7 +365,6 @@ function EditResume() {
             deleteArrayItem={(index) => deleteArrayItem("skills", index)}
           />
         );
-
       case "projects":
         return (
           <ProjectsDetailsForm
@@ -378,7 +376,6 @@ function EditResume() {
             deleteArrayItem={(index) => deleteArrayItem("projects", index)}
           />
         );
-
       case "certifications":
         return (
           <CertificationsInfoForm
@@ -392,7 +389,6 @@ function EditResume() {
             }
           />
         );
-
       case "additionalInfo":
         return (
           <AdditionalInfoForm
@@ -609,7 +605,19 @@ function EditResume() {
     }
   };
 
-  const handleDeleteResume = async () => {};
+  const handleDeleteResume = async () => {
+    try {
+      setIsLoading(true);
+      await axiosInstance.delete(API_PATHS.RESUME.DELETE(resumeId));
+
+      toast.success("رزومه باموفقیت حذف شد.");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error capturing images:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const reactToPrintFn = useReactToPrint({ contentRef: resumeDownloadRef });
 
@@ -665,7 +673,7 @@ function EditResume() {
 
             <button
               className="btn-small-light"
-              onClick={() => setOpenThemeSelector(true)}
+              onClick={() => setOpenPreviewModal(true)}
             >
               <LuDownload className="text-[16px]" />
               <span className="hidden md:block">مشاهده و دانلود</span>
@@ -690,7 +698,11 @@ function EditResume() {
               <div className="flex items-center justify-center gap-2 mt-3 mb-5">
                 <button
                   className="btn-small"
-                  onClick={validateAndNext}
+                  onClick={
+                    currentPage !== "additionalInfo"
+                      ? validateAndNext
+                      : () => setOpenPreviewModal(true)
+                  }
                   disabled={isLoading}
                 >
                   {currentPage === "additionalInfo" && (
@@ -736,7 +748,7 @@ function EditResume() {
 
       <Modal
         isOpen={openThemeSelector}
-        onClose={() => setOpenThemeSelector(resumeData?.template)}
+        onClose={() => setOpenThemeSelector(false)}
         title="تمامی قالبها"
       >
         <div className="w-[90vw] h-[80vh]">
@@ -750,6 +762,23 @@ function EditResume() {
             }}
             resumeData={null}
             onClose={() => setOpenThemeSelector(false)}
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={openPreviewModal}
+        onClose={() => setOpenPreviewModal(false)}
+        showActionBtn
+        actionBtnText="دانلود"
+        actionBtnIcon={<LuDownload className="text-[16px]" />}
+        onActionClick={() => reactToPrintFn()}
+      >
+        <div ref={resumeDownloadRef} className="max-w-[90vw] max-h-[80vh]">
+          <RenderResume
+            templateId={resumeData?.template?.theme || ""}
+            resumeData={resumeData}
+            colorPalette={resumeData?.template?.colorPalette || []}
           />
         </div>
       </Modal>

@@ -200,6 +200,15 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
           </div>
 
           <div className="mt-4">
+            <Title text="مهارتها" color={themeColors[2]} />
+            <SkillsSection
+              skills={resumeData.skills}
+              accentColor={themeColors[3]}
+              bgColor={themeColors[2]}
+            />
+          </div>
+
+          <div className="mt-4">
             <Title text="پروژه ها" color={themeColors[2]} />
 
             {resumeData.projects.map((project, index) => (
@@ -213,15 +222,6 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
                 isPreview={false}
               />
             ))}
-          </div>
-
-          <div className="mt-4">
-            <Title text="مهارتها" color={themeColors[2]} />
-            <SkillsSection
-              skills={resumeData.skills}
-              accentColor={themeColors[3]}
-              bgColor={themeColors[2]}
-            />
           </div>
 
           <div className="mt-4">

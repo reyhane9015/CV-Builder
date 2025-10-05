@@ -153,6 +153,15 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
         </div>
 
         <div className="mt-4">
+          <Title text="مهارتها" color={themeColors[2]} />
+          <SkillsSection
+            skills={resumeData.skills}
+            accentColor={themeColors[3]}
+            bgColor={themeColors[2]}
+          />
+        </div>
+
+        <div className="mt-4">
           <Title text="پروژه ها" color={themeColors[2]} />
 
           {resumeData.projects.map((project, index) => (
@@ -166,30 +175,6 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
               isPreview={false}
             />
           ))}
-        </div>
-
-        <div className="mt-5">
-          <Title text="تحصیلات" color={themeColors[2]} />
-
-          {resumeData.education.map((data, index) => (
-            <EducationInfo
-              key={`education_${index}`}
-              degree={data.degree}
-              institution={data.institution}
-              duration={`${formatYearMonth(data.startDate)} - ${formatYearMonth(
-                data.endDate
-              )}`}
-            />
-          ))}
-        </div>
-
-        <div className="mt-4">
-          <Title text="مهارتها" color={themeColors[2]} />
-          <SkillsSection
-            skills={resumeData.skills}
-            accentColor={themeColors[3]}
-            bgColor={themeColors[2]}
-          />
         </div>
 
         <div className="mt-4">
@@ -206,6 +191,21 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
               />
             ))}
           </div>
+        </div>
+
+        <div className="mt-5">
+          <Title text="تحصیلات" color={themeColors[2]} />
+
+          {resumeData.education.map((data, index) => (
+            <EducationInfo
+              key={`education_${index}`}
+              degree={data.degree}
+              institution={data.institution}
+              duration={`${formatYearMonth(data.startDate)} - ${formatYearMonth(
+                data.endDate
+              )}`}
+            />
+          ))}
         </div>
 
         <div>
