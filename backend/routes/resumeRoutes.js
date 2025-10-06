@@ -10,6 +10,7 @@ const {
   updateResume,
   deleteResume,
   uploadResumeThumbnail,
+  duplicateResume,
 } = require("../controllers/resumeController");
 
 const { protect } = require("../middlewares/authMiddleware");
@@ -43,5 +44,7 @@ router.post(
 );
 
 router.delete("/:id", protect, deleteResume);
+
+router.post("/:id/duplicate", protect, duplicateResume);
 
 module.exports = router;

@@ -219,6 +219,43 @@ const uploadResumeThumbnail = async (req, res) => {
   }
 };
 
+const duplicateResume = async (req, res) => {
+  try {
+    const originalResume = await Resume.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!originalResume) {
+      return res.status(404).json({ message: "Resume not found" });
+    }
+
+    // Create a new resume by copying the original data
+    const newResumeData = {
+      userId: req.user._id,
+      title: originalResume.title + " (Copy)",
+      profileInfo: originalResume.profileInfo,
+      contactInfo: originalResume.contactInfo,
+      workExperience: originalResume.workExperience,
+      education: originalResume.education,
+      skills: originalResume.skills,
+      projects: originalResume.projects,
+      certifications: originalResume.certifications,
+      languages: originalResume.languages,
+      interests: originalResume.interests,
+      thumbnailLink: originalResume.thumbnailLink,
+    };
+
+    const newResume = await Resume.create(newResumeData);
+
+    res.status(201).json(newResume);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to duplicate resume", error: error.message });
+  }
+};
+
 module.exports = {
   createResume,
   getUserResumes,
@@ -226,4 +263,5 @@ module.exports = {
   updateResume,
   deleteResume,
   uploadResumeThumbnail,
+  duplicateResume,
 };
