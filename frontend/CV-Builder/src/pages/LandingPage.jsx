@@ -7,6 +7,8 @@ import Modal from "../components/Modal";
 import { useContext } from "react";
 import { UserContext } from "../context/userContextExp";
 import ProfileInfoCard from "../components/Cards/ProfileInfoCard";
+import LOGO from "../assets/LOGO.png";
+import CustomersComments from "../components/CustommersComments";
 
 function LandingPage() {
   const { user } = useContext(UserContext);
@@ -27,7 +29,7 @@ function LandingPage() {
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
         <header className="flex justify-between items-center mb-16">
-          <div className="">رزومه ساز</div>
+          <img src={LOGO} alt="LOGO" className="w-[130px] h-[60px]" />
 
           {user ? (
             <ProfileInfoCard />
@@ -68,7 +70,7 @@ function LandingPage() {
 
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-center mb-12">
-            رزمه ساز ساز ساز
+            امکانات رزمه ساز
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
@@ -85,6 +87,10 @@ function LandingPage() {
               <p>رزمه خود را با یک کلیک در فرمت PDF دانلود کن</p>
             </div>
           </div>
+        </section>
+
+        <section className="">
+          <CustomersComments />
         </section>
 
         <Modal

@@ -32,6 +32,7 @@ import {
 import Modal from "./../../components/Modal";
 import ThemeSelector from "./Forms/ThemeSelector";
 import { DateObject } from "react-multi-date-picker";
+import Loading from "../../components/Loading";
 
 function EditResume() {
   const { resumeId } = useParams();
@@ -645,6 +646,11 @@ function EditResume() {
 
   return (
     <DashboardLayout>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50">
+          <Loading />
+        </div>
+      )}
       <div className="container mx-auto">
         <p className="pb-4"> ویرایش رزمه</p>
 

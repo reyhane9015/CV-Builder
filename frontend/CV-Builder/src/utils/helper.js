@@ -1,5 +1,6 @@
 // import moment from "moment";
 import html2canvas from "html2canvas";
+import jalaali from "jalaali-js";
 
 export const validateEmail = (email) => {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -133,11 +134,16 @@ export const getLightColorFormImage = (imageUrl) => {
   });
 };
 
-// date format mar 2025
-// export function formatYearMonth(yearMonth) {
-//   return yearMonth ? moment(yearMonth, "YYYY-MM").format("YYYY-MM") : "";
-// }
-
+export const toShamsi = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const shamsi = jalaali.toJalaali(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate()
+  );
+  return `${shamsi.jy}/${shamsi.jm}/${shamsi.jd}`;
+};
 // ------------ Conver resume to image ---------------
 
 const convertOklch = (value) => {

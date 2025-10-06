@@ -4,11 +4,13 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { LuCirclePlus } from "react-icons/lu";
-import moment from "moment";
+// import moment from "moment";
 import ResumeSummaryCard from "../../components/Cards/ResumeSummaryCard";
 import Modal from "../../components/Modal";
 import CreateResumeForm from "./CreateResumeForm";
 import toast from "react-hot-toast";
+import Loading from "../../components/Loading";
+import { toShamsi } from "../../utils/helper";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -99,6 +101,12 @@ function Dashboard() {
 
   return (
     <DashboardLayout>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/50">
+          <Loading />
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-7 pt-1 pb-6 px-4 md:px-0">
         <div
           className="h-[450px] flex flex-col gap-5 items-center justify-center bg-white rounded-lg border-3 border-dashed border-purple-300 hover:border-purple-500 hover:bg-purple-50/50 cursor-pointer"
@@ -119,11 +127,12 @@ function Dashboard() {
             imgUrl={resume?.thumbnailLink || null}
             title={resume.title}
             handleSaveTitle={handleSaveTitle}
-            lastUpdated={
-              resume?.updatedAt
-                ? moment(resume.updatedAt).format("YYYYY/MM/DD")
-                : ""
-            }
+            // lastUpdated={
+            //   resume?.updatedAt
+            //     ? moment(resume.updatedAt).format("YYYYY/MM/DD")
+            //     : ""
+            // }
+            lastUpdated={resume?.updatedAt ? toShamsi(resume.updatedAt) : ""}
             onSelect={() => navigate(`/resume/${resume?._id}`)}
             handleDeleteResume={() => handleDeleteResume(resume?._id)}
             handleDuplicateResume={() => handleDuplicateResume(resume?._id)}
@@ -131,7 +140,6 @@ function Dashboard() {
           />
         ))}
       </div>
-
       <Modal
         isOpen={openCreateModal}
         onClose={() => setOpenCreateModal(false)}

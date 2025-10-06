@@ -7,6 +7,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/userContextExp";
 import uploadImage from "../../utils/uploadImage";
+import Loading from "../../components/Loading";
 
 function SignUp({ setCurrentPage }) {
   const [profilePic, setProfilePic] = useState(null);
@@ -14,6 +15,7 @@ function SignUp({ setCurrentPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -42,6 +44,8 @@ function SignUp({ setCurrentPage }) {
 
     // signup api
     try {
+      setLoading(true);
+
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
         profileImageUrl = imgUploadRes.imageUrl || "";
@@ -66,6 +70,8 @@ function SignUp({ setCurrentPage }) {
       } else {
         setError("مشکلی پیش آمده لطفا بعدا مجددا امتحان کنید");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,8 +111,12 @@ function SignUp({ setCurrentPage }) {
 
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">
-            ثبت نام
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? (
+              <Loading className="w-5 h-5 border-purple-500" />
+            ) : (
+              "ثبت نام"
+            )}
           </button>
 
           <p className="text-[13px] text-slate-800 mt-3">

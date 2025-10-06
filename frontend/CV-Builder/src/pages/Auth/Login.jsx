@@ -5,11 +5,13 @@ import { validateEmail } from "../../utils/helper";
 import { UserContext } from "../../context/userContextExp";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
+import Loading from "../../components/Loading";
 
 function Login({ setCurrentPage }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -31,6 +33,8 @@ function Login({ setCurrentPage }) {
     try {
       // setError("");
 
+      setLoading(true);
+
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
@@ -51,6 +55,8 @@ function Login({ setCurrentPage }) {
         err?.response?.data?.message ||
           "مشکلی پیش آمده لطفا بعدا مجددا امتحان کنید"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,8 +87,12 @@ function Login({ setCurrentPage }) {
 
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">
-            ورود
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? (
+              <Loading className="w-5 h-5 border-purple-500" />
+            ) : (
+              "ورود"
+            )}
           </button>
 
           <p className="text-[13px] text-slate-800 mt-3">
