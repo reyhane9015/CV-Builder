@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./../../../components/Inputs/Input";
+import InputDate from "./../../../components/Inputs/InputDate";
 import { LuPlus, LuTrash2 } from "react-icons/lu";
 
 function CertificationsInfoForm({
@@ -37,7 +38,17 @@ function CertificationsInfoForm({
                 type="text"
               />
 
-              <Input
+              {/* <Input
+                value={experience.year || ""}
+                onChange={({ target }) =>
+                  updateArrayItem(index, "year", target.value)
+                }
+                label="سال اخذ"
+                placeholder="1404"
+                type="text"
+              /> */}
+
+              <InputDate
                 value={experience.year || ""}
                 onChange={({ target }) =>
                   updateArrayItem(index, "year", target.value)
@@ -74,7 +85,7 @@ function CertificationsInfoForm({
           }
         >
           <LuPlus />
-          افزودن سابقه کاری جدید
+          افزودن مدرک جدید
         </button>
       </div>
     </div>

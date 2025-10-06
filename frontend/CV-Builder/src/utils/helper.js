@@ -1,4 +1,4 @@
-import moment from "moment";
+// import moment from "moment";
 import html2canvas from "html2canvas";
 
 export const validateEmail = (email) => {
@@ -134,9 +134,9 @@ export const getLightColorFormImage = (imageUrl) => {
 };
 
 // date format mar 2025
-export function formatYearMonth(yearMonth) {
-  return yearMonth ? moment(yearMonth, "YYYY-MM").format("YYYY-MM") : "";
-}
+// export function formatYearMonth(yearMonth) {
+//   return yearMonth ? moment(yearMonth, "YYYY-MM").format("YYYY-MM") : "";
+// }
 
 // ------------ Conver resume to image ---------------
 

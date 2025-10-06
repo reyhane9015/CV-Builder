@@ -40,6 +40,7 @@ function LandingPage() {
             </button>
           )}
         </header>
+
         {/* Hero */}
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 pr-4 mb-8 md:mb-0">

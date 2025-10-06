@@ -16,7 +16,7 @@ function WorkExperience({
         </div>
 
         <p
-          className="text-sm font-bold italic"
+          className="text-[13px] font-bold italic"
           style={{ color: durationColor }}
         >
           {duration}

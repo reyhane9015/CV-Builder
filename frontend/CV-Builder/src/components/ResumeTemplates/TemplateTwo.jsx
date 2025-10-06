@@ -10,7 +10,7 @@ import {
 import { RiLinkedinLine } from "react-icons/ri";
 import ContactInfo from "../ResumeSections/ContactInfo";
 import EducationInfo from "../ResumeSections/EducationInfo";
-import { formatYearMonth } from "../../utils/helper";
+// import { formatYearMonth } from "../../utils/helper";
 import LanguageSection from "../ResumeSections/Languagesection";
 import WorkExperience from "../ResumeSections/WorkExperience";
 import ProjectInfo from "../ResumeSections/ProjectInfo";
@@ -39,9 +39,9 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    // const actualBaseWidth = templateRef.current.offsetWidth;
-    // setBaseWidth(actualBaseWidth);
-    setBaseWidth(800);
+    const actualBaseWidth = templateRef.current.offsetWidth;
+    setBaseWidth(actualBaseWidth);
+    // setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -155,9 +155,7 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
                   key={`education_${index}`}
                   degree={data.degree}
                   institution={data.institution}
-                  duration={`${formatYearMonth(
-                    data.startDate
-                  )} - ${formatYearMonth(data.endDate)}`}
+                  duration={`${data.startDate} - ${data.endDate}`}
                 />
               ))}
             </div>
@@ -190,9 +188,7 @@ function TemplateTwo({ resumeData, colorPalette, containerWidth }) {
                 key={`work_${index}`}
                 company={data.company}
                 role={data.role}
-                duration={`${formatYearMonth(
-                  data.startDate
-                )} - ${formatYearMonth(data.endDate)}`}
+                duration={`${data.startDate} - ${data.endDate}`}
                 durationColor={themeColors[4]}
                 description={data.description}
               />

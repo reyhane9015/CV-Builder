@@ -10,7 +10,7 @@ import {
 import { RiLinkedinLine } from "react-icons/ri";
 import ContactInfo from "../ResumeSections/ContactInfo";
 import EducationInfo from "../ResumeSections/EducationInfo";
-import { formatYearMonth } from "../../utils/helper";
+// import { formatYearMonth } from "../../utils/helper";
 import LanguageSection from "../ResumeSections/Languagesection";
 import WorkExperience from "../ResumeSections/WorkExperience";
 import ProjectInfo from "../ResumeSections/ProjectInfo";
@@ -40,9 +40,9 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    // const actualBaseWidth = templateRef.current.offsetWidth;
-    // setBaseWidth(actualBaseWidth);
-    setBaseWidth(800);
+    const actualBaseWidth = templateRef.current.offsetWidth;
+    setBaseWidth(actualBaseWidth);
+    // setBaseWidth(800);
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
@@ -59,7 +59,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
         height: "auto",
       }}
     >
-      <div className="px-10 pt-10 pb-2">
+      <div className="px-5 pt-2">
         <div className="flex items-start gap-5 mb-5">
           <div
             className="w-[150px] h-[180px] max-w-[150px] max-h-[180px] rounded-2xl flex items-center justify-center"
@@ -141,7 +141,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
       </div>
 
       {/* bottom section */}
-      <div className="mx-10 py-5">
+      <div className="mx-5 py-2">
         <div>
           <Title text="معرفی خود" color={themeColors[2]} />
           <p className="text-sm font-medium">
@@ -149,7 +149,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           </p>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
           <Title text="سوابق کاری" color={themeColors[2]} />
 
           {resumeData.workExperience.map((data, index) => (
@@ -157,16 +157,14 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
               key={`work_${index}`}
               company={data.company}
               role={data.role}
-              duration={`${formatYearMonth(data.startDate)} - ${formatYearMonth(
-                data.endDate
-              )}`}
+              duration={`${data.startDate} - ${data.endDate}`}
               durationColor={themeColors[4]}
               description={data.description}
             />
           ))}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
           <Title text="پروژه ها" color={themeColors[2]} />
 
           {resumeData.projects.map((project, index) => (
@@ -182,7 +180,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           ))}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
           <Title text="تحصیلات" color={themeColors[2]} />
 
           {resumeData.education.map((data, index) => (
@@ -190,14 +188,12 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
               key={`education_${index}`}
               degree={data.degree}
               institution={data.institution}
-              duration={`${formatYearMonth(data.startDate)} - ${formatYearMonth(
-                data.endDate
-              )}`}
+              duration={`${data.startDate} - ${data.endDate}`}
             />
           ))}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
           <Title text="مهارتها" color={themeColors[2]} />
           <SkillsSection
             skills={resumeData.skills}
@@ -206,7 +202,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
           />
         </div>
 
-        <div className="mt-6">
+        <div className="mt-3">
           <Title text="مدارک" color={themeColors[2]} />
 
           <div className="grid grid-cols-2 gap-4">
@@ -223,7 +219,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
         </div>
 
         <div>
-          <div className="mt-6">
+          <div className="mt-3">
             <Title text="زبانها" color={themeColors[2]} />
 
             <LanguageSection
@@ -235,7 +231,7 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
 
           {resumeData.interests.length > 0 &&
             resumeData.interests[0] !== "" && (
-              <div className="mt-6">
+              <div className="mt-3">
                 <Title text="علایق" color={themeColors[2]} />
 
                 <div className="flex items-center flex-wrap gap-3 mt-4">

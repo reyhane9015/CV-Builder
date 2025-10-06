@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./../../../components/Inputs/Input";
+import InputDate from "./../../../components/Inputs/InputDate";
 import { LuPlus, LuTrash2 } from "react-icons/lu";
 
 function EducationDetailsForm({
@@ -12,14 +13,14 @@ function EducationDetailsForm({
     <div className="px-5 pt-5">
       <h2 className="text-lg font-semibold text-gray-900">تحصیلات</h2>
       <div className="mt-4 flex flex-col gap-4 mb-3">
-        {educationInfo.map((experience, index) => (
+        {educationInfo.map((education, index) => (
           <div
             key={index}
             className="border border-gray-200/80 p-4 rounded-lg relative"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
-                value={experience.degree || ""}
+                value={education.degree || ""}
                 onChange={({ target }) =>
                   updateArrayItem(index, "degree", target.value)
                 }
@@ -28,7 +29,7 @@ function EducationDetailsForm({
                 type="text"
               />
               <Input
-                value={experience.institution || ""}
+                value={education.institution || ""}
                 onChange={({ target }) =>
                   updateArrayItem(index, "institution", target.value)
                 }
@@ -37,24 +38,41 @@ function EducationDetailsForm({
                 type="text"
               />
 
-              <Input
-                value={experience.startDate || ""}
+              {/* <Input
+                value={education.startDate || ""}
                 onChange={({ target }) =>
                   updateArrayItem(index, "startDate", target.value)
                 }
                 label="تاریخ شروع"
                 placeholder="1404/10/10"
                 type="month"
+              /> */}
+
+              <InputDate
+                value={education.startDate || ""}
+                onChange={({ target }) =>
+                  updateArrayItem(index, "startDate", target.value)
+                }
+                label="تاریخ شروع"
+                placeholder="1404/10"
               />
 
-              <Input
-                value={experience.endDate || ""}
+              {/* <Input
+                value={education.endDate || ""}
                 onChange={({ target }) =>
                   updateArrayItem(index, "endDate", target.value)
                 }
                 label="تاریخ پایان"
                 placeholder="1404/10/10"
                 type="month"
+              /> */}
+              <InputDate
+                value={education.endDate || ""}
+                onChange={({ target }) =>
+                  updateArrayItem(index, "endDate", target.value)
+                }
+                label="تاریخ پایان"
+                placeholder="1405/10"
               />
 
               {educationInfo.length > 1 && (

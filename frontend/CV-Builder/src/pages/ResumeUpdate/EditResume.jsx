@@ -31,6 +31,7 @@ import {
 } from "../../utils/helper";
 import Modal from "./../../components/Modal";
 import ThemeSelector from "./Forms/ThemeSelector";
+import { DateObject } from "react-multi-date-picker";
 
 function EditResume() {
   const { resumeId } = useParams();
@@ -150,12 +151,12 @@ function EditResume() {
               errors.push(`نام شرکت در سابقه کاری ${index + 1} را وارد کنید`);
             if (!role.trim())
               errors.push(`عنوان شغلی در سابقه کاری ${index + 1} را وارد کنید`);
-            // if (!startDate || !/^\d{4}-\d{2}$/.test(startDate)) {
+            // if (!startDate || !/^\d{4}\/\d{2}\/\d{2}$/.test(startDate)) {
             //   errors.push(
             //     `تاریخ شروع معتبر در سابقه کاری ${index + 1} را وارد کنید`
             //   );
             // }
-            // if (!endDate || !/^\d{4}-\d{2}$/.test(endDate)) {
+            // if (!endDate || !/^\d{4}\/\d{2}\/\d{2}$/.test(endDate)) {
             //   errors.push(
             //     `تاریخ پایان معتبر در سابقه کاری ${index + 1} را وارد کنید`
             //   );
@@ -220,8 +221,7 @@ function EditResume() {
               errors.push(`عنوان در مدارک ${index + 1} را وارد کنید`);
             if (!issuer.trim())
               errors.push(`${index + 1} توضیحات در مدرک را وارد کنید`);
-            if (!year.trim())
-              errors.push(`${index + 1} توضیحات در مدرک را وارد کنید`);
+            if (!year) errors.push(`${index + 1} تاریخ در مدرک را وارد کنید`);
           }
         );
         break;
@@ -419,6 +419,8 @@ function EditResume() {
 
   // update array item(profilesInfo[0]...)
   const updateArrayItem = (section, index, key, value) => {
+    console.log("Updating", { section, index, key, value });
+
     setResumeData((prev) => {
       const updatedArray = [...prev[section]];
 

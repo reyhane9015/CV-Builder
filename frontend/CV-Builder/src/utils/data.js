@@ -71,8 +71,8 @@ export const DUMMY_RESUME_DATA = {
     {
       company: "ایرانسل",
       role: "برنامه نویس",
-      startDate: "2025-01",
-      endDate: "2025-05",
+      startDate: "1400/06",
+      endDate: "1405/06",
       description:
         "ارتقا اپلیکیشن و سایت مشتری در مدت شش ماه و افزایش بازدهی 20% و بازید سایت.",
     },
@@ -81,8 +81,8 @@ export const DUMMY_RESUME_DATA = {
     {
       degree: "ارشد مدیریت",
       institution: "دانشگاه تهران",
-      startDate: "2025-01",
-      endDate: "2025-02",
+      startDate: "1404/06",
+      endDate: "1404/12",
     },
   ],
   skills: [
