@@ -657,6 +657,7 @@ function EditResume() {
                 title: value,
               }))
             }
+            onSave={() => toast.success("رزومه با موفقیت ویرایش شد.")}
           />
 
           <div className="flex items-center gap-4">
