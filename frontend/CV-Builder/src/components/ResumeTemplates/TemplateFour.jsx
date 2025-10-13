@@ -11,7 +11,7 @@ import { RiLinkedinLine } from "react-icons/ri";
 import ContactInfo from "../ResumeSections/ContactInfo";
 import EducationInfo from "../ResumeSections/EducationInfo";
 // import { formatYearMonth } from "../../utils/helper";
-import LanguageSection from "../ResumeSections/Languagesection";
+import LanguageSection from "../ResumeSections/LanguageSection";
 import WorkExperience from "../ResumeSections/WorkExperience";
 import ProjectInfo from "../ResumeSections/ProjectInfo";
 import SkillsSection from "../ResumeSections/SkillsSection";
