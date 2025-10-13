@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileInfoCard from "../Cards/ProfileInfoCard";
 import { Link } from "react-router-dom";
-import LOGO from "../../assets/LOGO.PNG";
+import LOGO from "../../assets/LOGO.png";
 
 function Navbar() {
   return (
