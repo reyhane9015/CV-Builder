@@ -49,10 +49,10 @@ function Login({ setCurrentPage }) {
         updateUser(response.data);
         navigate("/dashboard");
       }
-    } catch (err) {
-      console.error("Login error:", err);
+    } catch (error) {
+      console.error("Login error:", error);
       setError(
-        err?.response?.data?.message ||
+        error?.response?.data?.message ||
           "مشکلی پیش آمده لطفا بعدا مجددا امتحان کنید"
       );
     } finally {

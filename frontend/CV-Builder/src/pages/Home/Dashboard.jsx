@@ -70,8 +70,6 @@ function Dashboard() {
     const prevTitle = prevResume?.title;
 
     try {
-      setIsLoading(true);
-
       setAllResumes((prev) =>
         prev.map((resume) =>
           resume._id === resumeId ? { ...resume, title: newTitle } : resume
@@ -83,7 +81,7 @@ function Dashboard() {
       });
 
       if (newTitle !== prevTitle) {
-        toast.success("رزومه با موفقیت ویرایش شد.");
+        toast.success("عنوان رزومه باموفقیت ویرایش شد.");
       }
     } catch (error) {
       console.log("Error on fetching resumes:", error);
@@ -94,8 +92,6 @@ function Dashboard() {
           resume._id === resumeId ? { ...resume, title: prevTitle } : resume
         )
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -136,7 +132,6 @@ function Dashboard() {
             onSelect={() => navigate(`/resume/${resume?._id}`)}
             handleDeleteResume={() => handleDeleteResume(resume?._id)}
             handleDuplicateResume={() => handleDuplicateResume(resume?._id)}
-            allResumes={allResumes}
           />
         ))}
       </div>
