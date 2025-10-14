@@ -42,13 +42,13 @@ function Login({ setCurrentPage }) {
 
       console.log("data is", response.data);
 
-      const { token } = response.data;
+      // const { token } = response.data;
 
-      if (token) {
-        localStorage.setItem("token", token);
-        updateUser(response.data);
-        navigate("/dashboard");
-      }
+      // if (token) {
+      // localStorage.setItem("token", token);
+      updateUser(response.data);
+      navigate("/dashboard");
+      // }
     } catch (error) {
       console.error("Login error:", error);
       setError(
