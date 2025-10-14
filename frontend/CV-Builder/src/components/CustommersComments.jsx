@@ -12,7 +12,7 @@ function CustomersComments() {
   return (
     <div className="py-12">
       <h2 className="text-center text-2xl font-bold mb-12">نظرات کاربران</h2>
-      <div className="bg-purple-900 text-center flex items-center justify-center bg-secondery-default rounded-md text-white p-4 mx-4 md:mx-8">
+      <div className="bg-black/90 text-center flex items-center justify-center bg-secondery-default rounded-md text-white p-4 mx-4 md:mx-8">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={20}
@@ -29,7 +29,7 @@ function CustomersComments() {
           {[img1, img2, img1, img2, img1].map((img, index) => (
             <SwiperSlide key={index}>
               <div className="py-4 m-2 md:m-4">
-                <div className="py-4 px-2 bg-purple-700/15 rounded-md text-white shadow-sm">
+                <div className="py-4 px-2 bg-gray-800 rounded-md text-white shadow-sm">
                   <div className="py-4 px-3">
                     <div className="flex items-start gap-4">
                       <div className="relative -top-12 h-[100px] w-[90px] overflow-hidden rounded-md mx-auto md:mx-0">
