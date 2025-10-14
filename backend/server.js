@@ -11,9 +11,10 @@ const app = express();
 
 app.use(
   cors({
-    origin:
-      "https://cv-builder-frontend-qcrt.onrender.com" ||
-      "http://localhost:5173/",
+    origin: [
+      "https://cv-builder-frontend-qcrt.onrender.com",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
