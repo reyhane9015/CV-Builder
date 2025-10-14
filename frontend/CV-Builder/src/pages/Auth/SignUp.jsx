@@ -58,12 +58,12 @@ function SignUp({ setCurrentPage }) {
         profileImageUrl,
       });
 
-      // const { token } = response.data;
-      // if (token) {
-      // localStorage.setItem("token", token);
-      updateUser(response.data);
-      navigate("/dashboard");
-      // }
+      const { token } = response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(response.data);
+        navigate("/dashboard");
+      }
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
