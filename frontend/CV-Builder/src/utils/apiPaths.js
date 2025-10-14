@@ -1,4 +1,10 @@
-export const BASE_URL = "https://cv-builder-backend-wbds.onrender.com";
+// export const BASE_URL = "https://cv-builder-backend-wbds.onrender.com";
+
+const isProduction = import.meta.env.MODE === "production";
+
+export const BASE_URL = isProduction
+  ? "https://cv-builder-backend-wbds.onrender.com" // Render backend
+  : "http://localhost:8000"; // Local backend
 
 export const API_PATHS = {
   AUTH: {
