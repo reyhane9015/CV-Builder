@@ -47,9 +47,10 @@ export const themeColorPalette = {
 export const DUMMY_RESUME_DATA = {
   title: "برنامه نویس",
   thumbnailLink:
-    "http://localhost:8000/uploads/resume-1759587595195-454737433.png",
+    "https://cv-builder-backend-wbds.onrender.com/uploads/resume-1759587595195-454737433.png",
   profileInfo: {
-    ProfilePreviewUrl: "http://localhost:8000/uploads/1.png",
+    ProfilePreviewUrl:
+      "https://cv-builder-backend-wbds.onrender.com/uploads/1.png",
     previewUrl: "",
     fullName: "مریم محمدی",
     description: "برنامه نویس",
