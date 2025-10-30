@@ -23,10 +23,9 @@ function Dashboard() {
     try {
       const response = await axiosInstance.get(API_PATHS.RESUME.GET_ALL);
       setAllResumes(response.data);
-
-      console.log("data in dashboard is", response.data);
     } catch (error) {
-      console.log("Error on fetching resumes:", error);
+      console.error(error);
+      toast.error("failed to fetch resumes.");
     }
   };
 
@@ -58,7 +57,7 @@ function Dashboard() {
       setAllResumes((prev) => [response.data, ...prev]);
       toast.success("رزومه با موفقیت کپی شد.");
     } catch (error) {
-      console.log("Error on fetching resumes:", error);
+      console.error("Error on fetching resumes:", error);
       toast.error("خطا در کپی رزومه");
     } finally {
       setIsLoading(false);
@@ -84,7 +83,7 @@ function Dashboard() {
         toast.success("عنوان رزومه باموفقیت ویرایش شد.");
       }
     } catch (error) {
-      console.log("Error on fetching resumes:", error);
+      console.error("Error on fetching resumes:", error);
       toast.error("خطا در ویرایش رزومه");
 
       setAllResumes((prev) =>

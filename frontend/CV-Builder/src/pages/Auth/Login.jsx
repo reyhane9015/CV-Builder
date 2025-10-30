@@ -40,8 +40,6 @@ function Login({ setCurrentPage }) {
         password,
       });
 
-      console.log("data is", response.data);
-
       const { token } = response.data;
 
       if (token) {

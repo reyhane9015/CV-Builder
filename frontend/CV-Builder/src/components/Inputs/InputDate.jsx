@@ -12,8 +12,6 @@ export default function InputDate({ value, onChange, label, placeholder }) {
     if (!dateObject) return;
     const formattedData = dateObject?.format("YYYY/MM/DD") || "";
 
-    console.log("Date picked:", formattedData);
-
     onChange({ target: { value: formattedData } });
   };
 

@@ -119,7 +119,6 @@ const updateResume = async (req, res) => {
         .json({ message: "Resume not found or unauthorized" });
     }
 
-    console.log("Incoming update body:", req.body);
     // Object.assign(resume, req.body);
     resume.set(req.body);
 

@@ -10,8 +10,6 @@ function RenderResume({
   colorPalette,
   containerWidth,
 }) {
-  console.log("resumeData in renderResume is", resumeData);
-
   switch (templateId) {
     case "Template One":
       return (

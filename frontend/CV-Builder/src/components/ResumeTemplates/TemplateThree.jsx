@@ -46,8 +46,6 @@ function TemplateThree({ resumeData, colorPalette, containerWidth }) {
     setScale(containerWidth / baseWidth);
   }, [containerWidth]);
 
-  console.log("resumeData in templateone is", resumeData);
-
   return (
     <div
       ref={templateRef}

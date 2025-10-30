@@ -10,10 +10,8 @@ function ProfileInfoCard() {
   const handleLogout = () => {
     localStorage.clear();
 
-    console.log("user", user);
     clearUser();
     navigate("/");
-    console.log("user", user);
   };
   return (
     user && (

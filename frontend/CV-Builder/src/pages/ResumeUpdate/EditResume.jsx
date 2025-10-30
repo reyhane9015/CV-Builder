@@ -420,8 +420,6 @@ function EditResume() {
 
   // update array item(profilesInfo[0]...)
   const updateArrayItem = (section, index, key, value) => {
-    console.log("Updating", { section, index, key, value });
-
     setResumeData((prev) => {
       const updatedArray = [...prev[section]];
 
@@ -463,12 +461,8 @@ function EditResume() {
         API_PATHS.RESUME.GET_BY_ID(resumeId)
       );
 
-      console.log("response data", response.data);
-
       if (response.data && response.data.profileInfo) {
         const resumeInfo = response.data;
-
-        console.log("resumeInfo", resumeInfo);
 
         setResumeData((prevState) => ({
           ...prevState,
@@ -530,11 +524,6 @@ function EditResume() {
           ? resumeData.profileInfo.profileImg
           : null;
 
-      // console.log(
-      //   "profileImageFileeeeeeee:",
-      //   resumeData?.profileInfo?.profileImg
-      // );
-
       const formData = new FormData();
       if (profileImageFile instanceof File) {
         formData.append("profileImage", profileImageFile);
@@ -543,15 +532,12 @@ function EditResume() {
         formData.append("thumbnail", thumbnailFile);
       }
 
-      // console.log("FormData contents:", [...formData.entries()]);
-
       const uploadResponse = await axiosInstance.put(
         API_PATHS.RESUME.UPLOAD_IMAGES(resumeId),
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
 
-      console.log("thumb issss", uploadResponse.data.thumbnailLink);
       const { thumbnailLink, ProfilePreviewUrl } = uploadResponse.data;
 
       if (thumbnailLink || ProfilePreviewUrl) {
@@ -592,12 +578,10 @@ function EditResume() {
         },
       };
 
-      const response = await axiosInstance.put(
+      await axiosInstance.put(
         API_PATHS.RESUME.UPDATE(resumeId),
         updatedResumeData
       );
-
-      console.log("Resume updated with imageeeeeeeeee:", response.data);
     } catch (error) {
       console.error("Error capturing image:", error);
       setErrorMsg(

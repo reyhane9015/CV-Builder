@@ -14,10 +14,6 @@ export default function ResumeForm() {
     });
   };
 
-  useEffect(() => {
-    console.log("resumeData.experience:", resumeData.experience);
-  }, [resumeData.experience]);
-
   return (
     <div>
       {resumeData.experience.map((experience, index) => (
